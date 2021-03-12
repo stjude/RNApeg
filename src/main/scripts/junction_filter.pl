@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # remove novel junctions present in other junction files
 
 use strict;

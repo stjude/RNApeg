@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # annotate junction files re: "primary" ENSEMBL transcripts
 # MNE 2/2015
 #

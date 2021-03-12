@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # downgrade "known" junctions to "novel" if evidence is exclusive to
 # a database we don't want to use for aberrant classification (e.g. AceView)
 # Do this AFTER standard annotation/correction:

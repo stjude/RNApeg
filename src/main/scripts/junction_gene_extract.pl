@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # extract results for individual genes from rnapeg output,
 # in tab-delimited and .bed format
 # MNE 7/2014
