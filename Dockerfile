@@ -53,8 +53,8 @@ RUN cpan App:cpanminus
 RUN cpanm --no-wget Data::Compare && chown -R root:root /root/.cpanm
 # - is this used by any of the main scripts, or just optional/supplemental?
 # - this layer doesn't seem to work in DNAnexus for some reason
-RUN cpanm --notest --force --no-wget DB_File XML::Parser::PerlSAX XML::Twig XML::DOM
-RUN cpanm --notest --force --no-wget Bio::Tools::CodonTable
+RUN cpanm --no-wget DB_File XML::Parser::PerlSAX XML::Twig XML::DOM
+RUN cpanm --no-wget Bio::Tools::CodonTable
 RUN cpanm --no-wget DBI
 RUN cpanm --no-wget Set::IntSpan
 # turn this off temporarily for dnanexus debugging
