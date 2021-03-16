@@ -1,6 +1,3 @@
-# Build off of ubuntu:16.04
-#FROM ubuntu:16.04
-
 FROM alpine:latest
 # build from Alpine for much smaller final image
 
