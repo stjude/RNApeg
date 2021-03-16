@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # simple reporting of strongest evidence of aberrant splicing by gene
 #
 # TO DO:

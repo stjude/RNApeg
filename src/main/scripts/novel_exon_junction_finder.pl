@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # in corrected junction counts, find:
 # - novel skips of known exons
 # - novel exons (1 end bounding known exon)

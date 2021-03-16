@@ -347,15 +347,15 @@ sub perl_test {
 
 
   my @cmds;
-  push @cmds, "/bin/env perl -v";
-  push @cmds, '/bin/env perl -e \'print "perl binary=$^X\n"\'';
+  push @cmds, "/usr/bin/env perl -v";
+  push @cmds, '/usr/bin/env perl -e \'print "perl binary=$^X\n"\'';
 
   foreach my $script (qw(
 			  bam_junction.pl
 			  floating_junction_fix.pl
 			  junction2gene.pl
 		       )) {
-    push @cmds, sprintf '/bin/env perl -cw `which %s`', $script;
+    push @cmds, sprintf '/usr/bin/env perl -cw `which %s`', $script;
   }
 
   foreach my $cmd (@cmds) {

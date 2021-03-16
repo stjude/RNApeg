@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # convert tab-delimited annotated junction file to .bed format
 # (w/various optional filters)
 #
