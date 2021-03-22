@@ -25,7 +25,7 @@ sub new {
 #  $self->jvm("/h1/edmonsom/local/Linux_x86_64/jre1.6.0_15/bin/java");
 #  $self->jvm("/usr/bin/env java");
   $self->ram(512);
-  $self->jvm("/bin/env java");
+  $self->jvm("/usr/bin/env java");
 #  $self->classpath("/home/medmonso/lib/bambino.jar");
   $self->configure(%options);
   return $self;
