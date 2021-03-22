@@ -1,0 +1,134 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <!-- TODO: replace SUBPACKAGE with the rest of the package name.  Often this
+  will be the same as the svn module name.  The full groupId should be the
+  name of the java package that contains the main code for the module.  -->
+  <groupId>org.stjude.compbio.rnapeg</groupId>
+  <!-- TODO: replace MODULE with the module name used in svn.  This may not
+  always match the svn name for some of the earliest projects added to svn  -->
+  <artifactId>rnapeg</artifactId>
+  <version>2.6.0</version>
+  <!-- TODO: Use the same module as was used in the artifactId -->
+  <name>RNApeg: RNA junction extraction and mapping correction</name>
+  <!-- TODO: Provide a brief description, e.g. 'Sample name parsing and building
+  library'.  It can go onto multiple lines -->
+  <description>RNApeg extracts RNA junctions from BAM files, corrects and standardizes mapping ambiguities, and performs gene annotations.</description>
+  <build>
+    <plugins>
+      <!-- This plugin is required, do not remove it -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8.1</version>
+        <configuration>
+          <show>public</show>
+          <sourcepath>src/main/java</sourcepath>
+        </configuration>
+      </plugin>
+      <!-- This plugin is required if you have any scripts or any other non-java
+      files in your module.  Usually you should leave it in -->
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.5</version>
+        <executions>
+          <!-- This execution will copy scripts to target; delete or comment out
+          if you don't have any shell scripts -->
+          <execution>
+            <id>copy-scripts</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/scripts</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/scripts</directory>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+          <!-- This execution will copy perl modules to target; delete or comment
+          out if you don't have any perl modules in perllib -->
+          <execution>
+            <id>copy-perllib</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/perllib</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/perllib</directory>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+          <!-- This execution will copy javascript to target; uncomment-out if
+          you have any javascript source (most projects don't) -->
+          <!--
+          <execution>
+            <id>copy-js</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/js</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/js</directory>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+          -->
+        </executions>
+      </plugin>      
+    </plugins>
+  </build>
+  <dependencies>
+    <!-- You should leave this in.  If you don't have unit tests, then you
+    should write some someday! -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.10</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- An example dependency to another CompBio module.  The groupId, 
+    artifactId, and version are taken from the pom.xml of that module.  The
+    scope value will always be "provided": -->
+
+    <dependency>
+        <groupId>broadinstitute</groupId>
+        <artifactId>picard</artifactId>
+        <version>2.6.0</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <!--
+    <dependency>
+      <groupId>org.stjude.compbio.common.sam</groupId>
+      <artifactId>common-java-sam</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    -->
+    <!-- An example dependency to a "library" (stored in subversion under
+    "lib/java") -->
+    <!--
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>1.2</version>
+      <scope>provided</scope>
+    </dependency>
+    -->
+  </dependencies>
+<properties>
+     <maven.compiler.source>1.8</maven.compiler.source>
+     <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+</project>
