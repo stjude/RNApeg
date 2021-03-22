@@ -1,3 +1,11 @@
+FROM maven:3.6-openjdk-11 as builder
+
+COPY pom.xml /tmp/build/pom.xml
+COPY src /tmp/build/src
+COPY dependencies /tmp/build/dependencies
+
+RUN cd /tmp/build && mvn install
+
 FROM alpine:latest
 # build from Alpine for much smaller final image
 
@@ -42,6 +50,8 @@ COPY dependencies/bin /RNApeg/src/bin
 COPY dependencies/lib/java /RNApeg/src/javalib
 COPY dependencies/lib/perl /RNApeg/src/perllib
 COPY src/main/docker/RNApeg.sh /RNApeg/src/bin
+
+COPY --from=builder /tmp/build/target /RNApeg/src/javalib
 
 # Change environment variables
 ENV PATH="/RNApeg/src/bin:${PATH}"
