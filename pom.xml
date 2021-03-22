@@ -101,11 +101,17 @@
     artifactId, and version are taken from the pom.xml of that module.  The
     scope value will always be "provided": -->
 
+    <!-- https://mvnrepository.com/artifact/com.github.broadinstitute/picard -->
     <dependency>
-        <groupId>broadinstitute</groupId>
-        <artifactId>picard</artifactId>
-        <version>2.6.0</version>
-        <scope>provided</scope>
+       <groupId>com.github.broadinstitute</groupId>
+       <artifactId>picard</artifactId>
+       <version>2.6.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.github.samtools/htsjdk -->
+    <dependency>
+       <groupId>com.github.samtools</groupId>
+       <artifactId>htsjdk</artifactId>
+       <version>1.129</version>
     </dependency>
 
     <!--
