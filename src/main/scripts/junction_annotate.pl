@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 # add annotations to a junction file from a GTF file (e.g. GenCode)
 #
 # MNE 2/2015
