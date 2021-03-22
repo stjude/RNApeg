@@ -4,7 +4,7 @@ COPY pom.xml /tmp/build/pom.xml
 COPY src /tmp/build/src
 COPY dependencies /tmp/build/dependencies
 
-RUN cd /tmp/build && mvn package
+RUN cd /tmp/build && mvn install
 
 FROM alpine:latest
 # build from Alpine for much smaller final image
@@ -51,7 +51,7 @@ COPY dependencies/lib/java /RNApeg/src/javalib
 COPY dependencies/lib/perl /RNApeg/src/perllib
 COPY src/main/docker/RNApeg.sh /RNApeg/src/bin
 
-COPY --from=builder /tmp/build/target/rnapeg-2.6.0.jar /RNApeg/src/javalib
+COPY --from=builder /tmp/build/target /RNApeg/src/javalib
 
 # Change environment variables
 ENV PATH="/RNApeg/src/bin:${PATH}"
