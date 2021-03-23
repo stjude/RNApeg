@@ -58,5 +58,6 @@ ENV PATH="/RNApeg/src/bin:${PATH}"
 ENV PERL5LIB="/RNApeg/src/perllib:${PERL5LIB}"
 ENV CLASSPATH=/RNApeg/src/javalib/*
 
+WORKDIR /results
 ENTRYPOINT ["/RNApeg/src/bin/RNApeg.sh"]
 CMD ["-h"]
