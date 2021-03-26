@@ -14,7 +14,7 @@ REFGENE=""
 OUTPUT_DIR=""
 
 usage() {
-    echo "RNApeg.sh [-h] -b bamfile -f fasta -r refflat [-rg refflat] -O output_dir"
+    echo "RNApeg.sh [-h] -b bamfile -f fasta -r refflat [-rg refflat] [-O output_dir]"
 }
 
 while [ ! -z "$1" ]; do
@@ -81,5 +81,4 @@ else
     mkdir -p $OUTPUT_DIR
     junction_extraction_wrapper.pl -no-config -bam $BAMFILE -o $OUTPUT_DIR -fasta $FASTA -refflat $REFFLAT -refgene $REFGENE -now
 fi
-
 
