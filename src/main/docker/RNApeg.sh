@@ -75,10 +75,9 @@ fi
 ##################
 
 echo "[*] Running junction_extraction_wrapper.pl"
-if [[ -z "$OUTPUT_DIR" ]]; then
-    junction_extraction_wrapper.pl -no-config -bam $BAMFILE -fasta $FASTA -refflat $REFFLAT -refgene $REFGENE -now
-else
+output_arg=
+if [[ -n "$OUTPUT_DIR" ]]; then
     mkdir -p $OUTPUT_DIR
-    junction_extraction_wrapper.pl -no-config -bam $BAMFILE -o $OUTPUT_DIR -fasta $FASTA -refflat $REFFLAT -refgene $REFGENE -now
+    output_arg="-o $OUTPUT_DIR"
 fi
-
+    junction_extraction_wrapper.pl -no-config -bam $BAMFILE -fasta $FASTA -refflat $REFFLAT -refgene $REFGENE -now ${output_arg}
