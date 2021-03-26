@@ -14,7 +14,7 @@ REFGENE=""
 OUTPUT_DIR=/results
 
 usage() {
-    echo "RNApeg.sh [-h] -b bamfile -f fasta -r refflat [-rg refflat]"
+    echo "RNApeg.sh [-h] -b bamfile -f fasta -r refflat [-rg refflat] -O output_dir"
 }
 
 while [ ! -z "$1" ]; do
@@ -23,6 +23,7 @@ while [ ! -z "$1" ]; do
         -b) BAMFILE=$2; shift;;
         -r) REFFLAT=$2; shift;;
         -f) FASTA=$2; shift;;
+        -O) OUTPUT_DIR=$2; shift;;
         -rg) REFGENE=$2; shift;;
 	-version) echo 20191119; exit 1;;
 	*) echo "ERROR: unrecognized parameter $1"; usage; exit 1; shift;;
@@ -55,9 +56,7 @@ elif [[ ! -f $FASTA.fai ]]; then
     usage
     exit 1
 elif [[ ! -d "$OUTPUT_DIR" ]]; then
-    usage
-    >&2 echo "ERROR: Output directory '$OUTPUT_DIR' does not exist; need mountpoint?"
-    exit 1
+    mkdir -p $OUTPUT_DIR
 fi
 
 if [[ -z "$REFGENE" ]]; then
