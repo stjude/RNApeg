@@ -31,6 +31,12 @@ while [ ! -z "$1" ]; do
     shift
 done
 
+bam_dir=$(dirname ${BAMFILE})
+bam_name=$(basename ${BAMFILE} ".bam")
+if [[ -f "${bam_dir}/${bam_name}.bai" ]]
+then
+  ln -s ${bam_dir}/${bam_name}.bai ${BAMFILE}.bai
+fi
 
 #######################
 ### Validate inputs ###
