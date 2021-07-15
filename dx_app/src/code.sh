@@ -51,7 +51,6 @@ main() {
 
   echo "=== RNApeg ==="
 
-  echo " [*] SJ_CONFIGS=$SJ_CONFIGS"
   echo " [*] Running junction_extraction_wrapper.pl"
   mkdir output
   if [ ${ref_name} == "GRCh37-lite" ]
