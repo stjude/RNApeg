@@ -1,0 +1,123 @@
+{
+  "outputSpec": [
+    {
+      "name": "junctions",
+      "label": "Junctions File",
+      "class": "file"
+    },
+    {
+      "name": "junctions_shifted",
+      "label": "Shifted Junctions File",
+      "class": "file"
+    },
+    {
+      "name": "junctions_shifted_bed",
+      "label": "Shifted Junctions bed",
+      "class": "file"
+    },
+    {
+      "name": "junctions_annotated",
+      "label": "Annotated Junctions File",
+      "class": "file"
+    }
+  ],
+  "inputSpec": [
+    {
+      "name": "bam",
+      "label": "BAM File",
+      "class": "file",
+      "patterns": [
+        "*.bam"
+      ],
+      "optional": false
+    },
+    {
+      "name": "bam_index",
+      "label": "BAM Index",
+      "class": "file",
+      "patterns": [
+        "*.bai"
+      ],
+      "optional": false
+    },
+    {
+      "class": "string",
+      "label": "Genome",
+      "name": "ref_name",
+      "optional": false,
+      "choices": ["GRCh37-lite", "GRCh38_no_alt"],
+      "default": "GRCh37-lite",
+      "help": "" 
+    }
+
+  ],
+  "version": "1.2.0",
+  "dxapi": "1.0.0",
+  "details": {
+    "contactEmail": "clay.mcleod@stjude.org"
+  },
+  "openSource": false,
+  "developers": [
+    "user-clmcleod",
+    "user-athrashe"
+  ],
+  "authorizedUsers": [
+    "user-clmcleod",
+    "user-snewman",
+    "user-appdpdnanexus_stjude.org",
+    "user-appdddnanexus_stjude.org",
+    "org-stjude_cloud_app_runners",
+    "org-stjude_cloud"
+  ],
+  "regionalOptions": {
+    "azure:westus": {
+      "systemRequirements": {
+        "*": {
+          "instanceType": "azure:mem3_ssd1_x16"
+        }
+      }
+    }
+  },
+  "billTo": "org-stjude_cloud",
+  "runSpec": {
+    "timeoutPolicy": {
+      "main": {
+        "hours": 15
+      }
+    },
+    "execDepends": [
+      {
+        "name": "openjdk-8-jre"
+      },
+      {
+        "name": "samtools"
+      },
+      {
+        "name": "parallel"
+      },
+      {
+        "name": "Data::Compare",
+        "package_manager": "cpan"
+      },
+      {
+        "name": "enum",
+        "package_manager": "cpan"
+      },
+      {
+        "name": "DBI",
+        "package_manager": "cpan"
+      }
+    ],
+    "file": "src/code.sh",
+    "release": "16.04",
+    "interpreter": "bash",
+    "distribution": "Ubuntu"
+  },
+  "access": {
+    "network": ["*"],
+    "allProjects": "VIEW"
+  },
+  "name": "stjude_rnapeg",
+  "title": "RNApeg (St. Jude)",
+  "summary": "Junction read counting"
+}
