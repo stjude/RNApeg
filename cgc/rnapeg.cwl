@@ -1,6 +1,9 @@
 {
     "class": "CommandLineTool",
     "cwlVersion": "v1.1",
+    "$namespaces": {
+        "sbg": "https://sevenbridges.com"
+    },
     "baseCommand": [],
     "inputs": [
         {
@@ -62,6 +65,7 @@
             }
         }
     ],
+    "doc": "# Description\nRNApeg is an RNA junction calling, correction, and quality-control package.\n\n## Inputs\n* **Fasta** - Reference genome in FASTA format. Chromosomes must match those in BAM header.\n* **BAM** - Aligned RNA-Seq BAM\n* **Refflat** - Uncompressed annotation file from UCSC genome annotation database\n\n## Outputs\n* **Junctions** - Flat file containing called RNA junctions",
     "label": "rnapeg",
     "requirements": [
         {
@@ -80,6 +84,16 @@
         {
             "class": "DockerRequirement",
             "dockerPull": "ghcr.io/stjude/rnapeg:latest"
+        }
+    ],
+    "sbg:links": [
+        {
+            "id": "https://rnajournal.cshlp.org/content/24/8/1056.short",
+            "label": "Publication"
+        },
+        {
+            "id": "https://github.com/stjude/RNApeg",
+            "label": "Source Code"
         }
     ]
 }
