@@ -1,6 +1,6 @@
 {
     "class": "CommandLineTool",
-    "cwlVersion": "v1.1",
+    "cwlVersion": "v1.2",
     "$namespaces": {
         "sbg": "https://sevenbridges.com"
     },
