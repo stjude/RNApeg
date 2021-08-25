@@ -83,7 +83,7 @@
     "hints": [
         {
             "class": "DockerRequirement",
-            "dockerPull": "ghcr.io/stjude/rnapeg:latest"
+            "dockerPull": "cgc-images.sbgenomics.com/stjude/rnapeg:latest"
         }
     ],
     "sbg:links": [
