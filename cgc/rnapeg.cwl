@@ -1,6 +1,9 @@
 {
     "class": "CommandLineTool",
-    "cwlVersion": "v1.1",
+    "cwlVersion": "v1.2",
+    "$namespaces": {
+        "sbg": "https://sevenbridges.com"
+    },
     "baseCommand": [],
     "inputs": [
         {
@@ -12,7 +15,7 @@
                 "position": 32
             },
             "label": "FASTA File",
-            "doc": "FASTA file",
+            "doc": "FASTA file of reference sequences. Must match the reference to which the BAM is aligned.",
             "sbg:fileTypes": "FA",
             "secondaryFiles": [
                 {
@@ -29,7 +32,7 @@
                 "position": 2
             },
             "label": "BAM File",
-            "doc": "input bamfile mapped to human genome builds GRCh37-lite or GRCh38_no_alt.",
+            "doc": "Input BAM file mapped to human genome builds GRCh37-lite or GRCh38_no_alt.",
             "sbg:fileTypes": "BAM",
             "secondaryFiles": [
                 {
@@ -62,6 +65,7 @@
             }
         }
     ],
+    "doc": "# Description\nRNApeg is an RNA junction calling, correction, and quality-control package.\n\n## Inputs\n* **Fasta** - Reference genome in FASTA format. Chromosomes must match those in BAM header.\n* **BAM** - Aligned RNA-Seq BAM\n* **Refflat** - Uncompressed annotation file from UCSC genome annotation database\n\n## Outputs\n* **Junctions** - Flat file containing called RNA junctions",
     "label": "rnapeg",
     "requirements": [
         {
@@ -80,6 +84,16 @@
         {
             "class": "DockerRequirement",
             "dockerPull": "ghcr.io/stjude/rnapeg:latest"
+        }
+    ],
+    "sbg:links": [
+        {
+            "id": "https://rnajournal.cshlp.org/content/24/8/1056.short",
+            "label": "Publication"
+        },
+        {
+            "id": "https://github.com/stjude/RNApeg",
+            "label": "Source Code"
         }
     ]
 }
