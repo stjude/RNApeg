@@ -15,7 +15,7 @@
                 "position": 32
             },
             "label": "FASTA File",
-            "doc": "FASTA file",
+            "doc": "FASTA file of reference sequences. Must match the reference to which the BAM is aligned.",
             "sbg:fileTypes": "FA",
             "secondaryFiles": [
                 {
@@ -32,7 +32,7 @@
                 "position": 2
             },
             "label": "BAM File",
-            "doc": "input bamfile mapped to human genome builds GRCh37-lite or GRCh38_no_alt.",
+            "doc": "Input BAM file mapped to human genome builds GRCh37-lite or GRCh38_no_alt.",
             "sbg:fileTypes": "BAM",
             "secondaryFiles": [
                 {
