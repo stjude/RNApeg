@@ -98,7 +98,7 @@
     ],
     "sbg:wrapperLicense": "Apache 2.0 License",
     "sbg:categories": [
-        "RNA",
+        "RNA-Seq",
         "Junction Calling"
     ],
     "sbg:license": "Apache 2.0 License"

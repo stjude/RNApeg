@@ -18,7 +18,7 @@ jobs:
           mv cgc/rnapeg.cwl.new cgc/rnapeg.cwl
           cat cgc/rnapeg.cwl
       - id: cgcdeploy
-        uses: jordan-rash/cgc-go@v0.1.4
+        uses: stjudecloud/cgc-go@v0.1.4
         with:
           file_location: "cgc/rnapeg.cwl"
           shortid: "stjude/rnapeg/rnapeg"
