@@ -1,4 +1,4 @@
-### RNApeg 2.6.0
+### RNApeg
 
 RNApeg is an RNA junction calling, correction, and quality-control package.  Its use is discussed in this paper:
 
