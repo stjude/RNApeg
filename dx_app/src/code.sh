@@ -55,9 +55,9 @@ main() {
   mkdir output
   if [ ${ref_name} == "GRCh37-lite" ]
   then
-    docker run -v /home/dnanexus:/data -v /stjude/reference:/reference -v /home/dnanexus/output:/results ghcr.io/stjude/rnapeg:latest -b /data/${bam_name} -O /results -f /reference/Homo_sapiens/${ref_name}/FASTA/${ref_name}.fa -r /reference/Homo_sapiens/${ref_name}/mRNA/Combined/all_refFlats.txt -rg /reference/Homo_sapiens/${ref_name}/mRNA/Combined/all_refFlats.txt
+    docker run -v /home/dnanexus:/data -v /stjude/reference:/reference -v /home/dnanexus/output:/results ghcr.io/stjude/rnapeg:RNAPEG_VERSION -b /data/${bam_name} -O /results -f /reference/Homo_sapiens/${ref_name}/FASTA/${ref_name}.fa -r /reference/Homo_sapiens/${ref_name}/mRNA/Combined/all_refFlats.txt -rg /reference/Homo_sapiens/${ref_name}/mRNA/Combined/all_refFlats.txt
   else
-    docker run -v /home/dnanexus:/data -v /stjude/reference:/reference -v /home/dnanexus/output:/results ghcr.io/stjude/rnapeg:latest -b /data/${bam_name} -O /results -f /reference/Homo_sapiens/${ref_name}/FASTA/${ref_name}.fa -r /reference/Homo_sapiens/${ref_name}/mRNA/RefSeq/refFlat-sharp.txt -rg /reference/Homo_sapiens/${ref_name}/mRNA/RefSeq/refFlat-sharp.txt
+    docker run -v /home/dnanexus:/data -v /stjude/reference:/reference -v /home/dnanexus/output:/results ghcr.io/stjude/rnapeg:RNAPEG_VERSION -b /data/${bam_name} -O /results -f /reference/Homo_sapiens/${ref_name}/FASTA/${ref_name}.fa -r /reference/Homo_sapiens/${ref_name}/mRNA/RefSeq/refFlat-sharp.txt -rg /reference/Homo_sapiens/${ref_name}/mRNA/RefSeq/refFlat-sharp.txt
   fi
 
   junctions=$(dx upload /home/dnanexus/output/${bam_name}.junctions.tab --brief)
