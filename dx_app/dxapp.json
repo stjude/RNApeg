@@ -56,7 +56,7 @@
   "details": {
     "contactEmail": "clay.mcleod@stjude.org"
   },
-  "openSource": false,
+  "openSource": true,
   "developers": [
     "user-clmcleod",
     "user-athrashe"
@@ -109,7 +109,8 @@
       }
     ],
     "file": "src/code.sh",
-    "release": "16.04",
+    "release": "20.04",
+    "version": "0",
     "interpreter": "bash",
     "distribution": "Ubuntu"
   },
