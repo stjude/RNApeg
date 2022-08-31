@@ -26,4 +26,4 @@ jobs:
       - 
         name: Build and push
         id: dx_build
-        run: bash ./build.sh --app ${{ env.SHORT_VERSION }} --publish
+        run: dx build --app --publish dx_app
