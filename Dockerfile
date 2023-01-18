@@ -33,6 +33,13 @@ RUN apk add --no-cache perl-doc
 # required for perl "use diagnostics", used by SampleName.pm
 RUN apk add --no-cache db-dev
 RUN apk add --no-cache expat-dev
+# required for dependencies of BioPerl
+RUN apk add --no-cache openssl
+RUN apk add --no-cache openssl-dev
+RUN apk add --no-cache zlib
+RUN apk add --no-cache zlib-dev
+# required for WDL workflows to use RNApeg
+RUN apk add --no-cache bash
 
 # Install perl modules
 RUN cpan App:cpanminus
