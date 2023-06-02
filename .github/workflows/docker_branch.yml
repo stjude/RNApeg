@@ -19,7 +19,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images:  ${{ env.REPO_LOWER }}
+          images:  ghcr.io/${{ env.REPO_LOWER }}
           tags: |
             type=ref,event=branch,prefix=branch-
             type=ref,event=pr
