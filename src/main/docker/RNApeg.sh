@@ -86,4 +86,4 @@ if [[ -n "$OUTPUT_DIR" ]]; then
     mkdir -p $OUTPUT_DIR
     output_arg="-o $OUTPUT_DIR"
 fi
-    junction_extraction_wrapper.pl -no-config -bam $BAMFILE -fasta $FASTA -refflat $REFFLAT -refgene $REFGENE -now ${output_arg}
+    junction_extraction_wrapper.pl -no-config -ignore-incompatible -bam $BAMFILE -fasta $FASTA -refflat $REFFLAT -refgene $REFGENE -now ${output_arg}

@@ -45,7 +45,7 @@ RUN apk add --no-cache bash
 RUN cpan App:cpanminus
 RUN cpanm --no-wget Data::Compare && chown -R root:root /root/.cpanm
 RUN cpanm --no-wget DB_File XML::Parser::PerlSAX XML::Twig XML::DOM
-RUN cpanm --no-wget Bio::Tools::CodonTable
+RUN cpanm --no-wget --force Bio::Tools::CodonTable
 RUN cpanm --no-wget DBI
 RUN cpanm --no-wget Set::IntSpan
 
