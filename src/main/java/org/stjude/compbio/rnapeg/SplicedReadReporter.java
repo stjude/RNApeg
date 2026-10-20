@@ -40,6 +40,13 @@ public class SplicedReadReporter {
 
   String READ_NAME_RESTRICT_STRING = null;
 
+  boolean DELETION_COMPENSATION = true;
+  // if a deletion occurs between a skip operator and a region of
+  // mapped sequence, consider the deletion part of the skip.
+  // e.g. SJRB032871_D1 chr13:48881541:+,chr13:48916735:+, some reads
+  // have 48881541 marked as a deleted base, so it is essentially part
+  // of the skip
+
   int RESTRICT_JUNCTION_START = 0;
   int RESTRICT_JUNCTION_END = 0;
 
@@ -139,6 +146,10 @@ public class SplicedReadReporter {
 
   public void set_ignore_incompatible (boolean v) {
     IGNORE_INCOMPATIBLE_REFERENCE = v;
+  }
+
+  public void set_deletion_compensation (boolean v) {
+    DELETION_COMPENSATION = v;
   }
 
   public void set_restrict_read_name (String name) {
@@ -336,7 +347,21 @@ public class SplicedReadReporter {
 	// we could use LinkedHashMap for sri2left etc., but that
 	// doesn't have get() methods
 
+	ArrayList<CigarElement> ces = new ArrayList<CigarElement>();
 	for (CigarElement ce : c.getCigarElements()) {
+	  ces.add(ce);
+	}
+	// store CIGAR elements in an array so we can look ahead and
+	// back in case a flanking deletion interferes with skip
+	// calculation
+	int ces_size = ces.size();
+
+	SkipDeletionSpan sdc = new SkipDeletionSpan(ces, sr);
+
+	//	for (CigarElement ce : c.getCigarElements()) {
+	  //	for (CigarElement ce : ces) {
+	for (int cei=0; cei < ces_size; cei++) {
+	  CigarElement ce = ces.get(cei);
 	  co = ce.getOperator();
 	  len = ce.getLength();
 	  //	System.err.println("op " + co + " " + len);  // debug
@@ -387,20 +412,32 @@ public class SplicedReadReporter {
 	    // base # before skip
 	    int seq2_start = ref_base + len;
 	    // base # after skip
-	    SplicedReadInfo sri = track_site(current_reference_name, seq1_end, seq2_start, sr);
-	    //	  System.err.println("money! splice=" + seq1_end + "-" + seq2_start + " insertion:" + has_insertion + " del:"+has_deletion + " read="+ sr.getReadName());
+	    boolean usable = true;
+	    
+	    if (DELETION_COMPENSATION) {
+	      usable = sdc.find_boundaries(ref_base, cei);
+	      seq1_end = sdc.get_start();
+	      seq2_start = sdc.get_end();
 
-	    sri_ordered.add(sri);
+	      //	      System.err.println("skip at " + ref_base + " for " + sr.getReadName() + " " + seq1_end + "-" + seq2_start + " usable=" + usable);  // debug
+	    }
 
-	    sri2left.put(sri, fi);
-	    // the current accumulator is shared, it provides right-flanking
-	    // information for the previous skip (if any) as well as 
-	    // left-flanking information for this skip
+	    if (usable) {
+	      SplicedReadInfo sri = track_site(current_reference_name, seq1_end, seq2_start, sr);
+	      //	      System.err.println("money! splice=" + seq1_end + "-" + seq2_start + " read="+ sr.getReadName());
 
-	    fi = new SplicedReadFlankingInfo();
-	    sri2right.put(sri, fi);
-	    // start new accumulator for right-flanking info for this skip
+	      sri_ordered.add(sri);
 
+	      sri2left.put(sri, fi);
+	      // the current accumulator is shared, it provides right-flanking
+	      // information for the previous skip (if any) as well as 
+	      // left-flanking information for this skip
+
+	      fi = new SplicedReadFlankingInfo();
+	      sri2right.put(sri, fi);
+	      // start new accumulator for right-flanking info for this skip
+	    }
+	    
 	    ref_base += len;
 	    // read index: since a skip, no change
 	  } else if (co.equals(CigarOperator.INSERTION)) {
@@ -746,6 +783,8 @@ public class SplicedReadReporter {
 	  srr.set_min_span(Integer.parseInt(argv[++i]));
 	} else if (argv[i].equals("-ignore-incompatible")) {
 	  srr.set_ignore_incompatible(true);
+	} else if (argv[i].equals("-no-deletion-compensation")) {
+	  srr.set_deletion_compensation(false);
 	} else {
 	  System.err.println("ERROR: unknown parameter " + argv[i]);  // debug
 	  System.exit(1);
