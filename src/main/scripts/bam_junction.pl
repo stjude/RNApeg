@@ -55,7 +55,9 @@ GetOptions(
 	   "-strand=s",
 	   "-ignore-incompatible",
 	   "-no-config",
-	  );
+	   "-no-deletion-compensation",
+	   "-verbose",
+	  ) || die "ERROR parsing command-line options";
 
 my $NO_CONFIG_MODE = $FLAGS{"no-config"};
 # primarily used when running in Docker
@@ -173,6 +175,9 @@ foreach my $bam (@{$files}) {
     $cl .= sprintf ' -region %s', $r;
   }
   $cl .= " -ignore-incompatible" if $FLAGS{"ignore-incompatible"};
+
+  $cl .= " -no-deletion-compensation" if $FLAGS{"no-deletion-compensation"};
+  $cl .= " -v" if $FLAGS{verbose};
 
   my $cmd = $jr->run(
 		     "-command" => $cl,

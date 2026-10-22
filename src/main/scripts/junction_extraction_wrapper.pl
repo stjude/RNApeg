@@ -89,9 +89,10 @@ my @options = (
 
 	       "-out-dir=s",
 	       "-no-config",
+	       "-base=s",
 	      );
 
-GetOptions(\%FLAGS, @options);
+GetOptions(\%FLAGS, @options) || die "ERROR parsing command line options";
 
 #perl_sanity_check();
 # causing problems w/cloud implementation of Cicero so outlived its usefulness.
@@ -336,7 +337,9 @@ sub run_cmd {
   printf STDERR "%s: running: %s\n", scalar(localtime), $cmd;
   system $cmd;
   confess "error calling $cmd, exit $?" if $?;
-  die "where is $outfile" unless -s $outfile;
+#  die "where is $outfile" unless -s $outfile;
+  confess "where is $outfile" unless -f $outfile;
+  # output may be zero length if e.g. no usable junctions
 }
 
 sub perl_test {
@@ -373,18 +376,20 @@ sub perl_sanity_check {
 
 sub get_outfile_base {
   my ($bam) = @_;
-  my $outfile;
-  my $out_dir = $FLAGS{"out-dir"};
-  if (@TAGS) {
-    die "tags not implemented w/out-dir yet" if $out_dir;
-    my ($hit) = grep {$bam =~ /$_/} @TAGS;
-    die "$bam doesn't match any tags" unless $hit;
-    $outfile = sprintf '%s.%s', $hit, basename($bam);
-  } elsif ($out_dir) {
-    die "$out_dir not a directory" unless -d $out_dir;
-    $outfile = sprintf '%s/%s', $out_dir, basename($bam);
-  } else {
-    $outfile = basename($bam);
+  my $outfile = $FLAGS{base};
+  unless ($outfile) {
+    my $out_dir = $FLAGS{"out-dir"};
+    if (@TAGS) {
+      die "tags not implemented w/out-dir yet" if $out_dir;
+      my ($hit) = grep {$bam =~ /$_/} @TAGS;
+      die "$bam doesn't match any tags" unless $hit;
+      $outfile = sprintf '%s.%s', $hit, basename($bam);
+    } elsif ($out_dir) {
+      die "$out_dir not a directory" unless -d $out_dir;
+      $outfile = sprintf '%s/%s', $out_dir, basename($bam);
+    } else {
+      $outfile = basename($bam);
+    }
   }
   return $outfile;
 }
